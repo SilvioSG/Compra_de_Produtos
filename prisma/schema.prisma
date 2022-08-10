@@ -24,8 +24,8 @@ model product {
   sku           Int
   name          String
   image         String?
-  purchase_date DateTime?
-  delivery_date DateTime?
+  purchase_date DateTime  @default(now())
+  delivery_date DateTime  @default(now())
   paid          Boolean
   width         Int
   height        Int
