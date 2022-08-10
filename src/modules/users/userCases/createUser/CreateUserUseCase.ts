@@ -5,11 +5,10 @@ interface ICreateUser {
   name: string;
   password: string;
   email: string;
-  active: boolean;
 }
 
 export class CreateUserUseCase {
-  async execute({ name, password, email, active }: ICreateUser) {
+  async execute({ name, password, email }: ICreateUser) {
     const userExist = await prisma.users.findFirst({
       where: {
         name: {
@@ -18,11 +17,12 @@ export class CreateUserUseCase {
         },
       },
     });
+
     if (userExist) {
       throw new Error("User already exists");
     }
 
-    const emailExist = await prisma.users.findMany({
+    const emailExist = await prisma.users.findFirst({
       where: {
         email: {
           equals: email,
@@ -41,7 +41,7 @@ export class CreateUserUseCase {
         name,
         password: hashPassword,
         email,
-        active,
+        active: true,
       },
     });
 

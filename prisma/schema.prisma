@@ -11,25 +11,27 @@ model users {
   id         String    @id @default(uuid())
   name       String    @unique
   password   String
-  email      String    @unique
+  email      String
   active     Boolean
   created_at DateTime  @default(now())
-  updated_at DateTime  @default(now())
+  updated_at DateTime?
+  delete_at  DateTime?
   product    product[]
 }
 
 model product {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   sku           Int
   name          String
-  image         String
-  purchase_date DateTime @default(now())
-  delivery_date DateTime @default(now())
+  image         String?
+  purchase_date DateTime?
+  delivery_date DateTime?
   paid          Boolean
   width         Int
   height        Int
-  created_ate   DateTime @default(now())
-  updated_at    DateTime @default(now())
+  created_ate   DateTime  @default(now())
+  updated_at    DateTime?
+  delete_at     DateTime?
   user_id       String
-  user          users    @relation(fields: [user_id], references: [id])
+  user          users     @relation(fields: [user_id], references: [id])
 }

@@ -1,10 +1,21 @@
 import { Router } from "express";
-import { CreateUserController } from "./modules/users/userCases/createUser/CreateUserController";
+import multer from "multer";
+import express from "express";
+import { storage } from "./config/upload";
+
+import { userRoutes } from "./modules/routes/users/users.routes";
+import { productRoutes } from "./modules/routes/products/product.routes";
 
 const routes = Router();
 
-const createUserController = new CreateUserController();
+const upload = multer({ storage: storage });
 
-routes.post("/user/", createUserController.handle);
+routes.post("/files", express.static("uploads"));
+routes.post("/upload", upload.single("file"), (req, res) => {
+  return res.json(req.file?.filename);
+});
+
+routes.use("/user", userRoutes);
+routes.use("/product", productRoutes);
 
 export { routes };
