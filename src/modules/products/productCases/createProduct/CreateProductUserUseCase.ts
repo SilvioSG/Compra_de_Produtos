@@ -6,11 +6,10 @@ interface ICreateProduct {
   width: number;
   height: number;
   user_id: string;
-  paid: boolean;
 }
 
 export class CreateProductUseCase {
-  async execute({ sku, name, width, height, user_id, paid }: ICreateProduct) {
+  async execute({ sku, name, width, height, user_id }: ICreateProduct) {
     if (!name) {
       throw new Error("Name Already Exist");
     }
@@ -22,7 +21,6 @@ export class CreateProductUseCase {
         width,
         height,
         user_id,
-        paid,
       },
     });
 
