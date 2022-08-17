@@ -6,14 +6,14 @@ export async function SendMail(req: Request, resp: Response) {
     host: "smtp.mailtrap.io",
     port: 2525,
     auth: {
-      user: "e8d7e7be1d6f2e",
-      pass: "1cfcf2ea5a1eb2",
+      user: process.env.NODEMAILER_USER,
+      pass: process.env.NODEMAILER_PASS,
     },
   });
 
   let message = await transport.sendMail({
     from: '"Pessoa teste" <pessoa@teste.com',
-    to: "Silviogome@gmail.com",
+    to: "teste@gmail.com",
     subject: "Email de Pagamento",
     text: "Este é um email de pagamento",
     html: "<p> Pagamento Recebido Com Sucesso<p>",
