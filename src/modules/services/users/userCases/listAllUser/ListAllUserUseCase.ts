@@ -1,24 +1,12 @@
-import { prisma } from "../../../../../database/prismaClient";
+import {
+  IUserRepository,
+  UserSave,
+} from "../../../../../repositoriesUser/IUserRepository";
 
 export class ListAllUserUseCase {
-  async execute(name: string) {
-    const users = await prisma.users.findMany({
-      where: {
-        name,
-        delete_at: null,
-      },
-      select: {
-        name: true,
-        id: true,
-        email: true,
-        active: true,
-        created_at: true,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
-    });
-
+  constructor(private ListAdminRepository: IUserRepository) {}
+  async execute(): Promise<UserSave[]> {
+    const users = await this.ListAdminRepository.listAll();
     return users;
   }
 }

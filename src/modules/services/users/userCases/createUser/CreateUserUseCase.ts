@@ -1,55 +1,31 @@
-import { hash } from "bcrypt";
-import { prisma } from "../../../../../database/prismaClient";
-
-interface ICreateUser {
-  name: string;
-  password: string;
-  email: string;
-}
+import {
+  CreateUser,
+  IUserRepository,
+} from "../../../../../repositoriesUser/IUserRepository";
 
 export class CreateUserUseCase {
-  async execute({ name, password, email }: ICreateUser) {
-    const userExist = await prisma.users.findFirst({
-      where: {
-        name: {
-          equals: name,
-          mode: "insensitive",
-        },
-      },
-    });
+  constructor(private UserRepository: IUserRepository) {}
 
-    if (userExist) {
-      throw new Error("User already exists");
+  async execute(data: CreateUser) {
+    // Verificar se o Email já existe
+    const emailExist = await this.UserRepository.findByEmail(data.email);
+
+    // Campo Nome não pode estar vazio
+    if (!data.name) {
+      throw new Error("Name is Require");
     }
 
-    const emailExist = await prisma.users.findFirst({
-      where: {
-        email: {
-          equals: email,
-          mode: "insensitive",
-        },
-      },
-    });
+    // Campo Email não pode estar vazio
+    if (!data.email) {
+      throw new Error("Email is Require");
+    }
+
     if (emailExist) {
       throw new Error("Email already exists");
     }
 
-    const hashPassword = await hash(password, 8);
-
-    const user = await prisma.users.create({
-      data: {
-        name,
-        password: hashPassword,
-        email,
-        active: true,
-      },
-      select: {
-        name: true,
-        email: true,
-        active: true,
-      },
-    });
-
+    // Se não, Deixa Criar
+    const user = await this.UserRepository.create(data);
     return user;
   }
 }
