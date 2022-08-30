@@ -1,35 +1,20 @@
 import { prisma } from "../../../../../database/prismaClient";
-
-interface ICreateProduct {
-  sku: number;
-  name: string;
-  width: number;
-  height: number;
-  user_id: string;
-}
+import {
+  CreateProduct,
+  IProductRepository,
+} from "../../../../../repositoriesProducts/IProductRepository";
 
 export class CreateProductUseCase {
-  async execute({ sku, name, width, height, user_id }: ICreateProduct) {
-    if (!name) {
-      throw new Error("Name Already Exist");
+  constructor(private ProductRepository: IProductRepository) {}
+  async execute(data: CreateProduct) {
+    // Verificando se o Produto já existe
+    const product = await this.ProductRepository.findByName(data.name);
+
+    if (product) {
+      throw new Error("Product already Exists");
     }
 
-    const createProduct = await prisma.product.create({
-      data: {
-        sku,
-        name,
-        width,
-        height,
-        user_id,
-      },
-      select: {
-        name: true,
-        id: true,
-        created_at: true,
-        width: true,
-        height: true,
-      },
-    });
+    const createProduct = await this.ProductRepository.create(data);
 
     return createProduct;
   }

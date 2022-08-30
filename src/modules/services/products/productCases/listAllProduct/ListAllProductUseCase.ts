@@ -1,25 +1,9 @@
-import { prisma } from "../../../../../database/prismaClient";
+import { IProductRepository } from "../../../../../repositoriesProducts/IProductRepository";
 
 export class ListAllProductUseCase {
+  constructor(private ListProductsRepository: IProductRepository) {}
   async execute() {
-    const products = await prisma.product.findMany({
-      where: {
-        delete_at: null,
-      },
-      select: {
-        name: true,
-        id: true,
-        height: true,
-        width: true,
-        user_id: true,
-        paid: true,
-        created_at: true,
-      },
-      orderBy: {
-        created_at: "desc",
-      },
-    });
-
+    const products = await this.ListProductsRepository.listAll();
     return products;
   }
 }
