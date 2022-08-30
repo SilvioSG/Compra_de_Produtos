@@ -43,6 +43,11 @@ export class CreateUserUseCase {
         email,
         active: true,
       },
+      select: {
+        name: true,
+        email: true,
+        active: true,
+      },
     });
 
     return user;
