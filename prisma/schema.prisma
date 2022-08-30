@@ -29,7 +29,7 @@ model product {
   paid          Boolean?
   width         Int
   height        Int
-  created_ate   DateTime  @default(now())
+  created_at    DateTime  @default(now())
   updated_at    DateTime?
   delete_at     DateTime?
   user_id       String

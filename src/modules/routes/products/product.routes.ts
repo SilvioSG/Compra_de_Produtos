@@ -29,7 +29,7 @@ productRoutes.put(
   updateProductController.handle
 );
 
-productRoutes.put(
+productRoutes.delete(
   "/delete/:id",
   ensureAuthenticateUser,
   deleteProductsController.handle

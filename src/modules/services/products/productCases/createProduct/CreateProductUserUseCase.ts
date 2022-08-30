@@ -22,6 +22,13 @@ export class CreateProductUseCase {
         height,
         user_id,
       },
+      select: {
+        name: true,
+        id: true,
+        created_at: true,
+        width: true,
+        height: true,
+      },
     });
 
     return createProduct;

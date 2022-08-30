@@ -16,7 +16,7 @@ userRoutes.post("/", createUserController.handle);
 
 userRoutes.post("/authenticate", authenticateUserController.handle);
 
-userRoutes.put(
+userRoutes.delete(
   "/deleteUser/:id",
   ensureAuthenticateUser,
   deleteUserController.handle

@@ -9,6 +9,7 @@ export class ListAllUserUseCase {
       },
       select: {
         name: true,
+        id: true,
         email: true,
         active: true,
         created_at: true,
