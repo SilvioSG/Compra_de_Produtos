@@ -1,13 +1,11 @@
-import { response, Router } from "express";
-import nodemailer from "nodemailer";
+import { Router } from "express";
 import { ensureAuthenticateUser } from "../../middlewares/ensureAuthenticateUser";
 import { SendMail } from "../../middlewares/sendMail";
-
-import { CreateProductController } from "../../products/productCases/createProduct/CreateProductController";
-import { DeleteProductsController } from "../../products/productCases/deleteProduct/DeleteProductsController";
-import { ListAllProductController } from "../../products/productCases/listAllProduct/ListAllProductController";
-import { SendMailController } from "../../products/productCases/sendMail/SendMailController";
-import { UpdateProductController } from "../../products/productCases/updateProduct/UpdateProductController";
+import { CreateProductController } from "../../services/products/productCases/createProduct/CreateProductController";
+import { DeleteProductsController } from "../../services/products/productCases/deleteProduct/DeleteProductsController";
+import { ListAllProductController } from "../../services/products/productCases/listAllProduct/ListAllProductController";
+import { SendMailController } from "../../services/products/productCases/sendMail/SendMailController";
+import { UpdateProductController } from "../../services/products/productCases/updateProduct/UpdateProductController";
 
 const productRoutes = Router();
 

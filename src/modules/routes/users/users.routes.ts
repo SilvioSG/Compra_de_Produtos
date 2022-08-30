@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { ensureAuthenticateUser } from "../../middlewares/ensureAuthenticateUser";
-
-import { CreateUserController } from "../../users/userCases/createUser/CreateUserController";
-import { AuthenticateUserController } from "../../users/userCases/authenticateUser/AuthenticateUserController";
-import { DeleteUserController } from "../../users/userCases/deleteUser/DeleteUserController";
-import { ListAllUserController } from "../../users/userCases/listAllUser/ListAllUserController";
+import { AuthenticateUserController } from "../../services/users/userCases/authenticateUser/AuthenticateUserController";
+import { CreateUserController } from "../../services/users/userCases/createUser/CreateUserController";
+import { DeleteUserController } from "../../services/users/userCases/deleteUser/DeleteUserController";
+import { ListAllUserController } from "../../services/users/userCases/listAllUser/ListAllUserController";
 
 const userRoutes = Router();
 
