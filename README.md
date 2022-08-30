@@ -31,6 +31,10 @@ $ yarn
 
 # Execute a aplicação
 $ yarn dev
+
+# Insominia Test
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=Compra%20de%20Produtos&uri=https%3A%2F%2Fraw.githubusercontent.com%2FSilvioSG%2FCompra_de_Produtos%2Fdev%2Finsomnia%2FInsomnia_2022-08-30.json)
 ```
 
 ## :rocket: Tecnologias
