@@ -21,7 +21,7 @@ export class CreateUserUseCase {
     }
 
     if (emailExist) {
-      throw new Error("Email already exists");
+      throw new Error("User already exists");
     }
 
     // Se não, Deixa Criar

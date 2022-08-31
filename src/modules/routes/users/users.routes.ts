@@ -22,10 +22,6 @@ userRoutes.delete(
   deleteUserController.handle
 );
 
-userRoutes.get(
-  "/to_view",
-  ensureAuthenticateUser,
-  listAllUserController.handle
-);
+userRoutes.get("/", ensureAuthenticateUser, listAllUserController.handle);
 
 export { userRoutes };

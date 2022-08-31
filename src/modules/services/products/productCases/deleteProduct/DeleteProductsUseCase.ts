@@ -12,6 +12,14 @@ export class DeleteProductsUseCase {
       data: {
         delete_at: new Date(),
       },
+      select: {
+        id: true,
+        sku: true,
+        name: true,
+        created_at: true,
+        delete_at: true,
+        user_id: true,
+      },
     });
 
     if (!deleteProduct) {

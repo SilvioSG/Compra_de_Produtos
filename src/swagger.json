@@ -1,0 +1,390 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Mentoria Documentation",
+        "description": "This is an API Rent",
+        "version": "1.0.0",
+        "contact": {
+            "email":"lilica@gmail.com"
+        }
+    },
+    "paths": {
+        "/user/": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create user",
+                "description": "Create a new User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "UserTest",
+                                    "password": "TestSenha",
+                                    "email": "teste@gmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description" :"Created"
+                    },
+                    "400": {
+                        "description": "User already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["User"],
+                "summary": "List all Users",
+                "description": "List all users",
+                "security" :[
+                    { "bearerAuth": []}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items":{
+                                        "type": "object",
+                                        "properties":{
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type":"string"
+                                            },
+                                            "active": {
+                                                "type": "boolean"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/authenticate":{
+            "post":{
+                "tags":["User"],
+                "summary": "Authenticate user",
+                "description": "Athentications user",
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "properties":{
+                                    "email": {
+                                        "type":"string"
+                                    },
+                                    "password": {
+                                        "type":"string"
+                                    }
+                                },
+                                "example":{
+                                    "password": "TestSenha",
+                                    "email": "teste@gmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Success"
+                    },
+                    "400":{
+                        "description": "Email or password incorretct!"
+                    }
+                }
+            }
+        },
+        "/user/deleteUser/{id}": {
+            "delete": {
+                "tags":["User"],
+                "summary": "Delete Users",
+                "description": "Delete users",
+                "security":[
+                    {"bearerAuth":[]}
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "require": true,
+                        "schema": {
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"string"
+                                            },
+                                            "name":{
+                                                "type": "string"
+                                            },
+                                            "active": {
+                                                "type":"boolean"
+                                            },
+                                            "created_at" :{
+                                                "type":"string",
+                                                "format":"date-time"
+                                            },
+                                            "deleted_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product": {
+            "post": {
+                "tags": ["Product"],
+                "summary": "Create Product",
+                "description": "Create a new product",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "sku": {
+                                        "type": "integer"
+                                    },
+                                    "width": {
+                                        "type": "integer"
+                                    },
+                                    "height": {
+                                        "type": "integer"
+                                    },
+                                    "user_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "sku": 124568 ,
+                                    "name": "Test Product",
+                                    "width": 999 ,
+                                    "height": 999,
+                                    "user_id":"test Product" 
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description" :"Created"
+                    },
+                    "400": {
+                        "description": "Product already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Product"],
+                "summary": "List all Products",
+                "description": "List all Products",
+                "security" :[
+                    { "bearerAuth": []}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json":{
+                                "schema": {
+                                    "type": "array",
+                                    "items":{
+                                        "type": "object",
+                                        "properties":{
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "type":"string"
+                                            },
+                                            "height": {
+                                                "type": "integer"
+                                            },
+                                            "width": {
+                                                "type": "integer"
+                                            },
+                                            "user_id": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/delete/{id}": {
+            "delete": {
+                "tags":["Product"],
+                "summary": "Delete Product",
+                "description": "Delete Product",
+                "security":[
+                    {"bearerAuth":[]}
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "require": true,
+                        "schema": {
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "items":{
+                                        "type":"object",
+                                        "properties":{
+                                            "id":{
+                                                "type":"string"
+                                            },
+                                            "sku":{
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type":"string"
+                                            },
+                                            "created_at" :{
+                                                "type":"string",
+                                                "format":"date-time"
+                                            },
+                                            "deleted_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "user_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        "/product/update/{id}": {
+            "put": {
+                "tags":["Product"],
+                "summary": "Update Product",
+                "description": "Update Product",
+                "security":[
+                    {"bearerAuth":[]}
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "require": true,
+                        "schema": {
+                            "type":"string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "properties":{
+                                    "width":{
+                                        "type":"integer"
+                                    },
+                                    "height": {
+                                        "type":"integer"
+                                    }
+                                },
+                                "example": {
+                                    "width":999,
+                                    "height":999
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success"
+                    },
+                    "400":{
+                        "description": "Product cannot be updated"
+                    }
+                }
+        }   }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

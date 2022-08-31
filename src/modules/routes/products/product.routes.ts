@@ -17,11 +17,7 @@ const sendMailController = new SendMailController();
 
 productRoutes.post("/", createProductController.handle);
 
-productRoutes.get(
-  "/to_view",
-  ensureAuthenticateUser,
-  listAllProductController.handle
-);
+productRoutes.get("/", ensureAuthenticateUser, listAllProductController.handle);
 
 productRoutes.put(
   "/update/:id",

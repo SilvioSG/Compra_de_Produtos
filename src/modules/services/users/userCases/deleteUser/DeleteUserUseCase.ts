@@ -14,6 +14,13 @@ export class DeleteUserUseCase {
         active: false,
         delete_at: new Date(),
       },
+      select: {
+        id: true,
+        name: true,
+        active: true,
+        created_at: true,
+        delete_at: true,
+      },
     });
 
     if (!deleteUser) {

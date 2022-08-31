@@ -8,7 +8,7 @@ interface IUpdateProduct {
 
 export class UpdateProductUseCase {
   async execute({ id, width, height }: IUpdateProduct) {
-    const result = await prisma.product.updateMany({
+    const result = await prisma.product.update({
       where: {
         id: String(id),
       },
@@ -18,6 +18,13 @@ export class UpdateProductUseCase {
         updated_at: new Date(),
         purchase_date: new Date(),
         delivery_date: new Date(),
+      },
+      select: {
+        id: true,
+        name: true,
+        width: true,
+        height: true,
+        updated_at: true,
       },
     });
 
