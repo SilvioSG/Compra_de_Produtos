@@ -1,3 +1,4 @@
+import { AppError } from "../../../../../erros/AppError";
 import {
   CreateUser,
   IUserRepository,
@@ -10,7 +11,7 @@ export class DeleteUserUseCase {
     const deleteUser = await this.UserRepository.deleteUser(id);
 
     if (!deleteUser) {
-      throw new Error("Usuário não foi deletado");
+      throw new AppError("Usuário não foi deletado");
     }
 
     return deleteUser;

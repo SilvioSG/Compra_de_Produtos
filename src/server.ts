@@ -4,6 +4,7 @@ import swaggerUI from "swagger-ui-express";
 import swaggerFile from "./swagger.json";
 import "express-async-errors";
 import { routes } from "./routes";
+import { AppError } from "./erros/AppError";
 
 const app = express();
 
@@ -13,8 +14,8 @@ app.use("/api-docs/", swaggerUI.serve, swaggerUI.setup(swaggerFile));
 
 app.use(routes);
 
-app.use((err: Error, req: Request, resp: Response, next: NextFunction) => {
-  if (err instanceof Error) {
+app.use((err: AppError, req: Request, resp: Response, next: NextFunction) => {
+  if (err instanceof AppError) {
     return resp.status(404).json({
       message: err.message,
     });

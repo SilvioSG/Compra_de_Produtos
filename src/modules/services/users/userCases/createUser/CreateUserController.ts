@@ -14,7 +14,8 @@ export class CreateUserController {
       name,
       password,
       email,
+      id: "",
     });
-    return res.json(result);
+    return res.status(201).json(result);
   }
 }

@@ -1,3 +1,4 @@
+import { AppError } from "../../../../../erros/AppError";
 import {
   CreateUser,
   IUserRepository,
@@ -12,16 +13,16 @@ export class CreateUserUseCase {
 
     // Campo Nome não pode estar vazio
     if (!data.name) {
-      throw new Error("Name is Require");
+      throw new AppError("Name is Require");
     }
 
     // Campo Email não pode estar vazio
     if (!data.email) {
-      throw new Error("Email is Require");
+      throw new AppError("Email is Require");
     }
 
     if (emailExist) {
-      throw new Error("User already exists");
+      throw new AppError("User already exists");
     }
 
     // Se não, Deixa Criar
