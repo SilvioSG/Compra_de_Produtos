@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { ProductPrismaRepository } from "../../../../../repositoriesProducts/ProductPrismaRepository";
+import { ProductPrismaRepository } from "../../../../../repositories/repositoriesProducts/ProductPrismaRepository";
+
 import { CreateProductUseCase } from "./CreateProductUserUseCase";
 
 export class CreateProductController {

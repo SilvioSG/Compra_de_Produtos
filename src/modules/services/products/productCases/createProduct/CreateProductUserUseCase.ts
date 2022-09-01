@@ -1,8 +1,7 @@
-import { prisma } from "../../../../../database/prismaClient";
 import {
   CreateProduct,
   IProductRepository,
-} from "../../../../../repositoriesProducts/IProductRepository";
+} from "../../../../../repositories/repositoriesProducts/IProductRepository";
 
 export class CreateProductUseCase {
   constructor(private ProductRepository: IProductRepository) {}

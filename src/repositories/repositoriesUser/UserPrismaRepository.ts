@@ -1,5 +1,5 @@
 import { hash } from "bcrypt";
-import { prisma } from "../database/prismaClient";
+import { prisma } from "../../database/prismaClient";
 import { CreateUser, IUserRepository, UserSave } from "./IUserRepository";
 
 class UserPrismaRepository implements IUserRepository {
@@ -51,6 +51,28 @@ class UserPrismaRepository implements IUserRepository {
     });
 
     return users;
+  }
+
+  async deleteUser(id: string): Promise<UserSave> {
+    const deleteUser = await prisma.users.update({
+      where: {
+        id: String(id),
+      },
+      data: {
+        active: false,
+        delete_at: new Date(),
+      },
+      select: {
+        id: true,
+        name: true,
+        active: true,
+        created_at: true,
+        delete_at: true,
+        email: true,
+      },
+    });
+
+    return deleteUser;
   }
 }
 

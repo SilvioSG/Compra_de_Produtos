@@ -1,4 +1,5 @@
 export type CreateProduct = {
+  id: string;
   sku: number;
   name: string;
   width: number;
@@ -21,4 +22,5 @@ export interface IProductRepository {
   create(data: CreateProduct): Promise<ProductSave>;
   findByName(name: string): Promise<CreateProduct | null>;
   listAll(): Promise<ProductSave[]>;
+  deleteProduct(id: string): Promise<ProductSave>;
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { UserPrismaRepository } from "../../../../../repositoriesUser/UserPrismaRepository";
+import { UserPrismaRepository } from "../../../../../repositories/repositoriesUser/UserPrismaRepository";
+
 import { ListAllUserUseCase } from "./ListAllUserUseCase";
 
 export class ListAllUserController {

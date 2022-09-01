@@ -1,7 +1,7 @@
 import {
   CreateUser,
   IUserRepository,
-} from "../../../../../repositoriesUser/IUserRepository";
+} from "../../../../../repositories/repositoriesUser/IUserRepository";
 
 export class CreateUserUseCase {
   constructor(private UserRepository: IUserRepository) {}

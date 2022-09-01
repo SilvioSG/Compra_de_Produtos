@@ -1,7 +1,7 @@
 import {
   IUserRepository,
   UserSave,
-} from "../../../../../repositoriesUser/IUserRepository";
+} from "../../../../../repositories/repositoriesUser/IUserRepository";
 
 export class ListAllUserUseCase {
   constructor(private ListAdminRepository: IUserRepository) {}

@@ -1,26 +1,12 @@
-import { prisma } from "../../../../../database/prismaClient";
-interface IDeleteProduct {
-  id: string;
-}
+import {
+  CreateProduct,
+  IProductRepository,
+} from "../../../../../repositories/repositoriesProducts/IProductRepository";
 
 export class DeleteProductsUseCase {
-  async execute({ id }: IDeleteProduct) {
-    const deleteProduct = await prisma.product.update({
-      where: {
-        id,
-      },
-      data: {
-        delete_at: new Date(),
-      },
-      select: {
-        id: true,
-        sku: true,
-        name: true,
-        created_at: true,
-        delete_at: true,
-        user_id: true,
-      },
-    });
+  constructor(private ProductRepository: IProductRepository) {}
+  async execute({ id }: CreateProduct) {
+    const deleteProduct = await this.ProductRepository.deleteProduct(id);
 
     if (!deleteProduct) {
       throw new Error("Produto não foi deletado");

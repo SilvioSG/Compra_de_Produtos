@@ -1,4 +1,4 @@
-import { prisma } from "../database/prismaClient";
+import { prisma } from "../../database/prismaClient";
 import {
   CreateProduct,
   IProductRepository,
@@ -61,5 +61,28 @@ export class ProductPrismaRepository implements IProductRepository {
     });
 
     return products;
+  }
+
+  async deleteProduct(id: string): Promise<ProductSave> {
+    const deleteProduct = await prisma.product.update({
+      where: {
+        id,
+      },
+      data: {
+        delete_at: new Date(),
+      },
+      select: {
+        id: true,
+        sku: true,
+        name: true,
+        width: true,
+        height: true,
+        created_at: true,
+        delete_at: true,
+        user_id: true,
+      },
+    });
+
+    return deleteProduct;
   }
 }

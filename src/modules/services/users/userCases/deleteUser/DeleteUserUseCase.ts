@@ -1,27 +1,13 @@
-import { prisma } from "../../../../../database/prismaClient";
-
-interface IDeleteUsers {
-  id: string;
-}
+import {
+  CreateUser,
+  IUserRepository,
+} from "../../../../../repositories/repositoriesUser/IUserRepository";
 
 export class DeleteUserUseCase {
-  async execute({ id }: IDeleteUsers) {
-    const deleteUser = await prisma.users.update({
-      where: {
-        id: String(id),
-      },
-      data: {
-        active: false,
-        delete_at: new Date(),
-      },
-      select: {
-        id: true,
-        name: true,
-        active: true,
-        created_at: true,
-        delete_at: true,
-      },
-    });
+  constructor(private UserRepository: IUserRepository) {}
+
+  async execute({ id }: CreateUser) {
+    const deleteUser = await this.UserRepository.deleteUser(id);
 
     if (!deleteUser) {
       throw new Error("Usuário não foi deletado");
