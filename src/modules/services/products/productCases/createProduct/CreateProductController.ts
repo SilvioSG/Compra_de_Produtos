@@ -19,6 +19,6 @@ export class CreateProductController {
       id: "",
     });
 
-    return resp.status(401).json(result);
+    return resp.status(201).json(result);
   }
 }
