@@ -16,7 +16,7 @@ app.use(routes);
 
 app.use((err: AppError, req: Request, resp: Response, next: NextFunction) => {
   if (err instanceof AppError) {
-    return resp.status(400).json({
+    return resp.status(404).json({
       message: err.message,
     });
   }
