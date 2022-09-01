@@ -16,8 +16,9 @@ export class CreateProductController {
       width,
       height,
       user_id,
+      id: "",
     });
 
-    return resp.json(result);
+    return resp.status(201).json(result);
   }
 }

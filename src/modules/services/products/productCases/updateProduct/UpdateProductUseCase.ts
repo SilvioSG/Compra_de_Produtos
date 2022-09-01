@@ -1,4 +1,5 @@
 import { prisma } from "../../../../../database/prismaClient";
+import { AppError } from "../../../../../erros/AppErros";
 
 interface IUpdateProduct {
   id: string;
@@ -29,7 +30,7 @@ export class UpdateProductUseCase {
     });
 
     if (!result) {
-      throw new Error("Product cannot be updated");
+      throw new AppError("Product cannot be updated");
     }
 
     return result;

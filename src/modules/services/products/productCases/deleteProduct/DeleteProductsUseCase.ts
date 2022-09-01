@@ -1,3 +1,4 @@
+import { AppError } from "../../../../../erros/AppErros";
 import {
   CreateProduct,
   IProductRepository,
@@ -9,7 +10,7 @@ export class DeleteProductsUseCase {
     const deleteProduct = await this.ProductRepository.deleteProduct(id);
 
     if (!deleteProduct) {
-      throw new Error("Produto não foi deletado");
+      throw new AppError("Produto não foi deletado");
     }
 
     return deleteProduct;

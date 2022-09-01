@@ -1,3 +1,4 @@
+import { AppError } from "../../../../../erros/AppErros";
 import {
   CreateUser,
   IUserRepository,
@@ -21,7 +22,7 @@ export class CreateUserUseCase {
     }
 
     if (emailExist) {
-      throw new Error("User already exists");
+      throw new AppError("User already exists");
     }
 
     // Se não, Deixa Criar
